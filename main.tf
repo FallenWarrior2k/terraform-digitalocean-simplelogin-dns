@@ -10,7 +10,7 @@ locals {
 }
 
 # Verification
-resoresource "digitalocean_record" "verification" {
+resource "digitalocean_record" "verification" {
   # Knock-off conditional
   # Idea taken from https://stackoverflow.com/a/60231673
   count = var.verification != null ? 1 : 0
