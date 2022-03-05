@@ -9,6 +9,18 @@ locals {
   }
 }
 
+# Verification
+resoresource "digitalocean_record" "verification" {
+  # Knock-off conditional
+  # Idea taken from https://stackoverflow.com/a/60231673
+  count = var.verification != null ? 1 : 0
+
+  domain = var.zone
+  name   = var.subdomain
+  type   = "TXT"
+  value  = "sl-verification=${var.verification}"
+}
+
 # MX
 resource "digitalocean_record" "mx" {
   for_each = local.mx_weights
